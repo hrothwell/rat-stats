@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c7jxfi3k1fm8w"]
+
+[ext_resource type="Script" uid="uid://d31jvahkaa58a" path="res://ping_example.gd" id="1_usxvu"]
+[ext_resource type="PackedScene" uid="uid://cmm086bho2phv" path="res://addons/rat-stats/Ping.tscn" id="2_usxvu"]
+
+[node name="PingExample" type="Control" unique_id=22453232]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_usxvu")
+
+[node name="Ping" parent="." unique_id=201790788 instance=ExtResource("2_usxvu")]
+unique_name_in_owner = true
+update_interval_seconds = 2.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1907901404]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=65418850]
+unique_name_in_owner = true
+layout_mode = 2
+text = "..."
+
+[node name="Server" type="Button" parent="VBoxContainer" unique_id=1394393477]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start server"
+
+[node name="Client" type="Button" parent="VBoxContainer" unique_id=1187465425]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Join server"

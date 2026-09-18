@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://q2ojpb8pyas7"]
+
+[ext_resource type="Script" uid="uid://dwhuxhcx3xvyn" path="res://addons/rat-stats/frames_per_second.gd" id="1_x2ltg"]
+
+[node name="FramesPerSecond" type="Node" unique_id=864120719]
+script = ExtResource("1_x2ltg")
+
+[node name="Timer" type="Timer" parent="." unique_id=470562176]
+unique_name_in_owner = true
