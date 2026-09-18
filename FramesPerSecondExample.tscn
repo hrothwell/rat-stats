@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://le75m2cumolx"]
+
+[ext_resource type="Script" uid="uid://bd146msqpfwwd" path="res://frames_per_second_example.gd" id="1_67844"]
+[ext_resource type="PackedScene" uid="uid://q2ojpb8pyas7" path="res://addons/rat-stats/FramesPerSecond.tscn" id="2_p3yoh"]
+
+[node name="FramesPerSecondExample" type="Control" unique_id=638839348]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_67844")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1310639070]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1875693858]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer" unique_id=1530387679]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Record"
+
+[node name="FramesPerSecond" parent="." unique_id=864120719 instance=ExtResource("2_p3yoh")]
+unique_name_in_owner = true
