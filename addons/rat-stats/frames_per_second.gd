@@ -1,4 +1,4 @@
-## Measure the current frames per second at only at specifed interval
+## Measure the current frames per second only at specifed interval
 class_name FramesPerSecond extends Node
 
 ## emitted with frame count
