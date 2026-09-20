@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://2nlh7647npou"]
+
+[ext_resource type="Script" uid="uid://c6u4054akn41o" path="res://metric_monitor_example.gd" id="1_gau5d"]
+[ext_resource type="Script" uid="uid://dwhuxhcx3xvyn" path="res://addons/rat-stats/frames_per_second.gd" id="2_ttwkk"]
+[ext_resource type="Script" uid="uid://cqk51a0uw5wbv" path="res://addons/rat-stats/memory_usage.gd" id="3_tkieb"]
+[ext_resource type="Script" uid="uid://cc5tr3un7b778" path="res://addons/rat-stats/ping.gd" id="4_ule5e"]
+[ext_resource type="Script" uid="uid://elhhwvickjnq" path="res://addons/rat-stats/metric_recorder.gd" id="5_ttwkk"]
+
+[node name="MetricMonitorExample" type="Control" unique_id=234180431]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gau5d")
+
+[node name="UpdateTimer" type="Timer" parent="." unique_id=80050766]
+autostart = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1289227422]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPS" type="HBoxContainer" parent="VBoxContainer" unique_id=787435279]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/FPS" unique_id=1900085242]
+layout_mode = 2
+text = "FPS: "
+
+[node name="FPSValue" type="Label" parent="VBoxContainer/FPS" unique_id=399537002]
+unique_name_in_owner = true
+layout_mode = 2
+text = "..."
+
+[node name="FramesPerSecond" type="Node" parent="VBoxContainer/FPS" unique_id=606723047 node_paths=PackedStringArray("timer")]
+unique_name_in_owner = true
+script = ExtResource("2_ttwkk")
+timer = NodePath("../../../UpdateTimer")
+metadata/_custom_type_script = "uid://dwhuxhcx3xvyn"
+
+[node name="Memory" type="HBoxContainer" parent="VBoxContainer" unique_id=934585039]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Memory" unique_id=704467118]
+layout_mode = 2
+text = "Memory: "
+
+[node name="MemoryValue" type="Label" parent="VBoxContainer/Memory" unique_id=1283007375]
+unique_name_in_owner = true
+layout_mode = 2
+text = "..."
+
+[node name="MemoryUsage" type="Node" parent="VBoxContainer/Memory" unique_id=1967917293 node_paths=PackedStringArray("timer")]
+unique_name_in_owner = true
+script = ExtResource("3_tkieb")
+timer = NodePath("../../../UpdateTimer")
+metadata/_custom_type_script = "uid://cqk51a0uw5wbv"
+
+[node name="Ping" type="HBoxContainer" parent="VBoxContainer" unique_id=2057913490]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Ping" unique_id=2032766879]
+layout_mode = 2
+text = "Ping: "
+
+[node name="PingValue" type="Label" parent="VBoxContainer/Ping" unique_id=1010003272]
+unique_name_in_owner = true
+layout_mode = 2
+text = "..."
+
+[node name="ServerButton" type="Button" parent="VBoxContainer/Ping" unique_id=2027214308]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Server"
+
+[node name="ClientButton" type="Button" parent="VBoxContainer/Ping" unique_id=1101944686]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Client"
+
+[node name="Ping" type="Node" parent="VBoxContainer/Ping" unique_id=1884362284 node_paths=PackedStringArray("timer")]
+unique_name_in_owner = true
+script = ExtResource("4_ule5e")
+record_ping_to_server = true
+timer = NodePath("../../../UpdateTimer")
+metadata/_custom_type_script = "uid://cc5tr3un7b778"
+
+[node name="Export" type="Button" parent="VBoxContainer" unique_id=390899823]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export logs"
+
+[node name="MetricRecorder" type="Node" parent="." unique_id=441997469 node_paths=PackedStringArray("_initial_monitors_to_record")]
+unique_name_in_owner = true
+script = ExtResource("5_ttwkk")
+_initial_monitors_to_record = [NodePath("../VBoxContainer/FPS/FramesPerSecond"), NodePath("../VBoxContainer/Memory/MemoryUsage"), NodePath("../VBoxContainer/Ping/Ping")]
+metadata/_custom_type_script = "uid://elhhwvickjnq"
