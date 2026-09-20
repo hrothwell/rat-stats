@@ -14,28 +14,24 @@ var currently_recording: Array[MetricMonitor] = []
 ## Export logs on timer timeout. 
 ## If not present no logs will be exported unless export_logs is called manually.
 @export 
-var export_logs_timer: Timer
+var _export_logs_timer: Timer
 
-## Root folder to export logs.
+## Folder to export logs.
 @export
-var log_folder: String = "user://logs/"
-
-## Calculated log location. <log_folder>/rat-stats/
-var _folder: String
+var _log_folder: String = "user://logs/rat-stats/"
 
 ## Entries contain: { utc_timestamp: String, metric: String, value: Variant }. 
 var _metric_logs: Array[Dictionary]
 
 func _ready() -> void:
-	_folder = str(log_folder, "rat-stats/")
-	if !DirAccess.dir_exists_absolute(_folder):
-		DirAccess.make_dir_recursive_absolute(_folder)
+	if !DirAccess.dir_exists_absolute(_log_folder):
+		DirAccess.make_dir_recursive_absolute(_log_folder)
 	
 	for m in _initial_monitors_to_record:
 		record_monitor(m)
 	
-	if export_logs_timer:
-		export_logs_timer.timeout.connect(export_logs)
+	if _export_logs_timer:
+		_export_logs_timer.timeout.connect(export_logs)
 
 ## Start recording a new montior. Upon exiting tree this monitor will be removed from currently_recording.
 func record_monitor(monitor: MetricMonitor) -> void:
@@ -67,7 +63,7 @@ func log_metric(value: Variant, name: String) -> void:
 ## Export the logs to configured folder. _metric_logs are cleared. 
 func export_logs() -> void:
 	var date_string := Time.get_datetime_string_from_system(true).replace(":", ".")
-	var filepath: String = str(_folder, date_string, "Z", ".json")
+	var filepath: String = str(_log_folder, date_string, "Z", ".json")
 	var file = FileAccess.open(filepath, FileAccess.WRITE)
 	file.store_line(JSON.stringify(_metric_logs))
 	_metric_logs.clear()

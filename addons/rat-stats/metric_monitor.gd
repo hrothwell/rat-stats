@@ -3,7 +3,7 @@
 @abstract
 class_name MetricMonitor extends Node
 
-## Emitted with the newly updated value
+## Emitted with the newly updated value.
 signal value_updated
 @export var timer: Timer
 
@@ -19,7 +19,7 @@ func _ready() -> void:
 	else:
 		printerr("No timer set on MetricMonitor: ", self)
 
-## Do any setup required at the start of _ready before timer is connected
+## Do any setup required at the start of _ready before timer is connected.
 func _setup() -> void:
 	pass
 

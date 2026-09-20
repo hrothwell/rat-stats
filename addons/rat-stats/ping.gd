@@ -1,13 +1,13 @@
-## Measure ping in milliseconds to multiplayer peer host
+## Measure ping in milliseconds to multiplayer peer host.
 class_name Ping extends MetricMonitor
 
-## emits with peer_to_last_reported_ping 
+## emits with peer_to_last_reported_ping.
 signal peer_ping_report_updated
 
 ## Record all client ping on server under peer_to_last_reported_ping. 
 @export var record_ping_to_server: bool = false
 
-## peer_id to last ping value in milliseconds. Only populated on server
+## peer_id to last ping value in milliseconds. Only populated on server.
 var peer_to_last_reported_ping: Dictionary[int, int] = {}
 
 var _connected: bool = false
@@ -37,7 +37,6 @@ func _pong(request_time: int) -> void:
 	if record_ping_to_server:
 		_record_ping.rpc_id(1, _last_value)
 
-## Record client ping back to server
 @rpc("any_peer", "call_remote", "unreliable")
 func _record_ping(ping_ms: int) -> void:
 	peer_to_last_reported_ping[multiplayer.get_remote_sender_id()] = ping_ms
