@@ -10,9 +10,16 @@ signal peer_ping_report_updated
 ## peer_id to last ping value in milliseconds. Only populated on server
 var peer_to_last_reported_ping: Dictionary[int, int] = {}
 
-func get_metric() -> Variant:
+var connected: bool = false
+
+func _ready() -> void:
+	multiplayer.connected_to_server.connect(func(): connected = true)
+	multiplayer.server_disconnected.connect(func(): connected = false)
+	super._ready()
+
+func _get_metric() -> Variant:
 	var time: int = Time.get_ticks_msec()
-	if multiplayer.multiplayer_peer && multiplayer.multiplayer_peer is not OfflineMultiplayerPeer && multiplayer.get_unique_id() != 1:
+	if connected:
 		ping_server.rpc_id(1, time)
 	return null
 
