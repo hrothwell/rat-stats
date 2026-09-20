@@ -3,6 +3,9 @@ class_name MemoryUsage extends MetricMonitor
 
 var _is_debug = OS.is_debug_build()
 
+func get_metric_name() -> String:
+	return "MemoryUsage (MB)"
+
 func _get_metric() -> Variant:
 	if !_is_debug:
 		return null

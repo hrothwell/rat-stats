@@ -17,6 +17,9 @@ func _setup() -> void:
 	multiplayer.server_disconnected.connect(func(): _connected = false)
 	multiplayer.peer_disconnected.connect(_remove_client_ping)
 
+func get_metric_name() -> String:
+	return "Ping (ms)"
+
 func _get_metric() -> Variant:
 	var time: int = Time.get_ticks_msec()
 	if _connected:

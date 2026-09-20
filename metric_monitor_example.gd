@@ -8,6 +8,8 @@ class_name MetricMonitorExample extends Control
 @onready var client_button: Button = %ClientButton
 @onready var ping: Ping = %Ping
 @onready var ping_value: Label = %PingValue
+@onready var export: Button = %Export
+@onready var metric_recorder: MetricRecorder = %MetricRecorder
 
 func _ready() -> void:
 	frames_per_second.value_updated.connect(func(v: Variant): fps_value.text = str(v))
@@ -16,6 +18,7 @@ func _ready() -> void:
 	ping.peer_ping_report_updated.connect(func(v: Variant): ping_value.text = str(v))
 	server_button.pressed.connect(start_server)
 	client_button.pressed.connect(join_server)
+	export.pressed.connect(metric_recorder.export_logs)
 
 func start_server() -> void:
 	var enet_peer := ENetMultiplayerPeer.new()

@@ -23,6 +23,10 @@ func _ready() -> void:
 func _setup() -> void:
 	pass
 
+@abstract
+func get_metric_name() -> String
+
+
 ## Implementations that return null must handle setting _last_value themselves.
 @abstract
 func _get_metric() -> Variant

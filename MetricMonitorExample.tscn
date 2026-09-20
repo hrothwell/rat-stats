@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dwhuxhcx3xvyn" path="res://addons/rat-stats/frames_per_second.gd" id="2_ttwkk"]
 [ext_resource type="Script" uid="uid://cqk51a0uw5wbv" path="res://addons/rat-stats/memory_usage.gd" id="3_tkieb"]
 [ext_resource type="Script" uid="uid://cc5tr3un7b778" path="res://addons/rat-stats/ping.gd" id="4_ule5e"]
+[ext_resource type="Script" uid="uid://elhhwvickjnq" path="res://addons/rat-stats/metric_recorder.gd" id="5_ttwkk"]
 
 [node name="MetricMonitorExample" type="Control" unique_id=234180431]
 layout_mode = 3
@@ -86,3 +87,14 @@ script = ExtResource("4_ule5e")
 record_ping_to_server = true
 timer = NodePath("../../../UpdateTimer")
 metadata/_custom_type_script = "uid://cc5tr3un7b778"
+
+[node name="Export" type="Button" parent="VBoxContainer" unique_id=390899823]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export logs"
+
+[node name="MetricRecorder" type="Node" parent="." unique_id=441997469 node_paths=PackedStringArray("_initial_monitors_to_record")]
+unique_name_in_owner = true
+script = ExtResource("5_ttwkk")
+_initial_monitors_to_record = [NodePath("../VBoxContainer/FPS/FramesPerSecond"), NodePath("../VBoxContainer/Memory/MemoryUsage"), NodePath("../VBoxContainer/Ping/Ping")]
+metadata/_custom_type_script = "uid://elhhwvickjnq"
